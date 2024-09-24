@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+
+* {
+  box-sizing: border-box;
+}
+div {
+  padding: 10px;
+  background-color: #f6f6f6;
+  overflow: hidden;
+}
+input[type="text"],
+textarea,
+select {
+  font: 17px Calibri;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+input[type="button"] {
+  font: 17px Calibri;
+  width: auto;
+  float: right;
+  cursor: pointer;
+  padding: 7px;
+}
+
+
+  </style>
+
+
+
+
+
+</head>
+<body>
+
+  <div>
+ 
+    <h1>WELCOME  !!!</h1>
+    
+    <br>
+   <H3>Please enter your order details</H3>
+    <div>
+      <input type="text" id="txtName" placeholder="Enter your name" />
+    </div>
+    <div>
+      <input type="text" id="phnn" placeholder="Enter your phone number" />
+    </div>
+    <div>
+      <input type="text" id="txtEmail" placeholder="Enter your email address" />
+    </div>
+   
+    <div>
+      <textarea id="msg" name="msg" placeholder="Order Details" style="height: 100px;"></textarea>
+    </div>
+    <div>
+      <textarea id="msg" name="msg" placeholder="ADDRESS" style="height: 100px;"></textarea>
+    </div>
+    <div>
+      <input type="button" id="bt" value="Save data to file" onclick="saveFile()" />
+    </div>
+  </div>
+
+
+    <script>
+              let saveFile = () => {
+            // Get the data from each element on the form.
+            const name = document.getElementById("txtName");
+            const phn = document.getElementById("phnn");
+            const email = document.getElementById("txtEmail");
+            // const country = document.getElementById("selCountry");
+            const msg = document.getElementById("msg");
+
+            // This variable stores all the data.
+            let data = "\r Name: " + name.value + " \r\n " + "Phone number: " + phn.value + " \r\n " + "Email: " + email.value + " \r\n " + "Address: " + msg.value;
+            console.log(data); //printing form data into the console
+            // Convert the text to BLOB.
+            const textToBLOB = new Blob([data], { type: "text/plain" });
+            var filename = new Date();
+            var month =new Date(); //months from 1-12
+            month = month.getMonth();
+
+            var day = new Date();
+            var day = day.getUTCDate();
+
+            var year = new Date();
+            var year = year.getUTCFullYear();
+
+            newdate = year + "/" + month + "/" + day;
+            const sFileName = filename; // The file to save the data.
+
+            let newLink = document.createElement("a");
+            newLink.download = new Date();
+
+            if (window.webkitURL != null) {
+                newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+            } else {
+                newLink.href = window.URL.createObjectURL(textToBLOB);
+                newLink.style.display = "none";
+                document.body.appendChild(newLink);
+            }
+
+            newLink.click();
+        };
+    </script>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
